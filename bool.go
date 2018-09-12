@@ -8,3 +8,12 @@ func Btoi(b bool) int {
 		return 0
 	}
 }
+
+// Itob converts integers to boolean, 0 is false, non-zeros are true.
+func Itob(i int) bool {
+	if i == 0 {
+		return false
+	} else {
+		return true
+	}
+}
