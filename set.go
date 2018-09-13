@@ -89,15 +89,19 @@ func (set StringSet) RemoveAll(strings []string) bool {
 	return set.manipulateAll(strings, StringSet.remove)
 }
 
+func stringSliceContains(strings []string, s string) bool {
+	for _, str := range strings {
+		if s == str {
+			return true
+		}
+	}
+	return false
+}
 func (set StringSet) RetainAll(strings []string) bool {
 	goaround.RequireNonNull(set)
 	var changed int = 0
-	length := len(strings)
-	sortedStrings := make([]string, length)
-	copy(sortedStrings, strings)
-	sort.Strings(sortedStrings)
 	for s := range set {
-		if sort.SearchStrings(sortedStrings, s) == length {
+		if !stringSliceContains(strings, s) {
 			changed += Btoi(set.remove(s))
 		}
 	}
