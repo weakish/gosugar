@@ -2,11 +2,13 @@ package gosugar
 
 import (
 	"github.com/weakish/goaround"
-	"sort"
 )
 
 type StringSet map[string]UnitType
 
+func NewStringSet() StringSet {
+	return make(StringSet)
+}
 
 func (set StringSet) IsEmpty() bool {
 	goaround.RequireNonNull(set)
