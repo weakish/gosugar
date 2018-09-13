@@ -128,12 +128,12 @@ func (set StringSet) Equals (other StringSet) bool {
 	}
 }
 
-func (set StringSet) Migrate (old map[string]bool) {
+func (set StringSet) MigrateFrom(old map[string]bool) {
 	if set.IsEmpty() {
 		for s := range old {
 			set[s] = Unit
 		}
 	} else {
-		panic("The receiver of StringSet.Migrate() is non-set!")
+		panic("The receiver of StringSet.MigrateFrom() is non-set!")
 	}
 }
