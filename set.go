@@ -141,3 +141,142 @@ func (set StringSet) MigrateFrom(old map[string]bool) {
 		panic("The receiver of StringSet.MigrateFrom() is not empty!")
 	}
 }
+
+
+type IntSet map[int]UnitType
+
+func NewIntSet() IntSet {
+	return make(IntSet)
+}
+
+func (set IntSet) IsEmpty() bool {
+	goaround.RequireNonNull(set)
+	if len(set) == 0 {
+		return true
+	} else {
+		return false
+	}
+}
+
+func (set IntSet) contains(i int) bool {
+	_, present := set[i]
+	return present
+}
+func (set IntSet) Contains(i int) bool {
+	goaround.RequireNonNull(set)
+	return set.contains(i)
+}
+
+func (set IntSet) ToSlice() []int {
+	goaround.RequireNonNull(set)
+	ints := make([]int, len(set))
+	for i := range set {
+		ints = append(ints, i)
+	}
+	return ints
+}
+
+func (set IntSet) add(i int) bool {
+	if set.contains(i) {
+		return false
+	} else {
+		set[i] = Unit
+		return true
+	}
+}
+func (set IntSet) Add(i int) bool {
+	goaround.RequireNonNull(set)
+	return set.add(i)
+}
+
+func (set IntSet) remove(i int) bool {
+	if set.contains(i) {
+		delete(set, i)
+		return true
+	} else {
+		return false
+	}
+}
+func (set IntSet) Remove(i int) bool {
+	goaround.RequireNonNull(set)
+	return set.remove(i)
+}
+
+func (set IntSet) ContainsAll(ints []int) bool {
+	goaround.RequireNonNull(set)
+	for _, i := range ints {
+		if !set.contains(i) {
+			return false
+		}
+	}
+	return true
+}
+
+func (set IntSet) manipulateAll(ints []int, operation func(IntSet, int) bool) bool {
+	var changed int = 0
+	for _, i := range ints {
+		changed += Btoi(operation(set, i))
+	}
+	return Itob(changed)
+}
+func (set IntSet) AddAll(ints []int) bool {
+	goaround.RequireNonNull(set)
+	return set.manipulateAll(ints, IntSet.add)
+}
+func (set IntSet) RemoveAll(ints []int) bool {
+	goaround.RequireNonNull(set)
+	return set.manipulateAll(ints, IntSet.remove)
+}
+
+func intSliceContains(ints []int, i int) bool {
+	for _, integer := range ints {
+		if i == integer {
+			return true
+		}
+	}
+	return false
+}
+func (set IntSet) RetainAll(ints []int) bool {
+	goaround.RequireNonNull(set)
+	var changed int = 0
+	for i := range set {
+		if !intSliceContains(ints, i) {
+			changed += Btoi(set.remove(i))
+		}
+	}
+	return Itob(changed)
+}
+
+func (set IntSet) Clear() {
+	goaround.RequireNonNull(set)
+	// Go compiler 1.11+ will optimize this automatically.
+	for i := range set {
+		delete(set, i)
+	}
+}
+
+func (set IntSet) Equals (other IntSet) bool {
+	goaround.RequireNonNull(set)
+	setSize := len(set)
+	otherSize := len(other)
+	if setSize != otherSize {
+		return false
+	} else {
+		for i := range set {
+			if !other.contains(i) {
+				return false
+			}
+		}
+		return true
+	}
+}
+
+func (set IntSet) MigrateFrom(old map[int]bool) {
+	if set.IsEmpty() {
+		for i := range old {
+			set[i] = Unit
+		}
+	} else {
+		panic("The receiver of IntSet.MigrateFrom() is not empty!")
+	}
+}

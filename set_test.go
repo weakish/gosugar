@@ -10,6 +10,11 @@ func ExampleNewStringSet() {
 	// Output:
 	// map[]
 }
+func ExampleNewIntSet() {
+	fmt.Println(NewIntSet())
+	// Output:
+	// map[]
+}
 
 func TestStringSet_Add(t *testing.T) {
 	set := NewStringSet()
