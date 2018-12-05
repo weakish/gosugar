@@ -138,6 +138,6 @@ func (set StringSet) MigrateFrom(old map[string]bool) {
 			set[s] = Unit
 		}
 	} else {
-		panic("The receiver of StringSet.MigrateFrom() is non-set!")
+		panic("The receiver of StringSet.MigrateFrom() is not empty!")
 	}
 }
