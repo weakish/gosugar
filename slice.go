@@ -18,7 +18,7 @@ func normalizeIndex(index int, length int) int {
 		} else {
 			return negatived
 		}
-	} else{
+	} else {
 		return index
 	}
 }
@@ -43,7 +43,7 @@ func normalizeExclusiveIndex(index int, length int) int {
 
 // GetByte indexes string with bound safety.
 func GetByte(s string, index int) byte {
-	goaround.RequireNonNull(s)
+	goaround.NotNil(s)
 	var length int = len(s)
 	requireNonEmpty(length)
 	var normalizedIndex int = normalizeInclusiveIndex(index, length)
@@ -52,7 +52,7 @@ func GetByte(s string, index int) byte {
 
 // GetBool indexes slices of booleans with bound safety.
 func GetBool(s []bool, index int) bool {
-	goaround.RequireNonNull(s)
+	goaround.NotNil(s)
 	var length int = len(s)
 	requireNonEmpty(length)
 	var normalizedIndex int = normalizeInclusiveIndex(index, length)
@@ -61,7 +61,7 @@ func GetBool(s []bool, index int) bool {
 
 // GetString indexes slices of strings with bound safety.
 func GetString(s []string, index int) string {
-	goaround.RequireNonNull(s)
+	goaround.NotNil(s)
 	var length int = len(s)
 	requireNonEmpty(length)
 	var normalizedIndex int = normalizeInclusiveIndex(index, length)
@@ -70,13 +70,12 @@ func GetString(s []string, index int) string {
 
 // GetInt indexes slices of integers with bound safety.
 func GetInt(s []int, index int) int {
-	goaround.RequireNonNull(s)
+	goaround.NotNil(s)
 	var length int = len(s)
 	requireNonEmpty(length)
 	var normalizedIndex int = normalizeInclusiveIndex(index, length)
 	return s[normalizedIndex]
 }
-
 
 func normalizeFromTo(fromIndex int, toIndex int, length int) (int, int) {
 	var normalizedFromIndex int = normalizeInclusiveIndex(fromIndex, length)
@@ -90,7 +89,7 @@ func normalizeFromTo(fromIndex int, toIndex int, length int) (int, int) {
 
 // SubString returns a substring with bound safety.
 func SubString(s string, fromIndex int, toIndex int) string {
-	goaround.RequireNonNull(s)
+	goaround.NotNil(s)
 	var length int = len(s)
 	if length == 0 {
 		return ""
@@ -102,7 +101,7 @@ func SubString(s string, fromIndex int, toIndex int) string {
 
 // SubBoolSlice returns a subslice with bound safety.
 func SubBoolSlice(s []bool, fromIndex int, toIndex int) []bool {
-	goaround.RequireNonNull(s)
+	goaround.NotNil(s)
 	var length int = len(s)
 	if length == 0 {
 		return []bool{}
@@ -114,7 +113,7 @@ func SubBoolSlice(s []bool, fromIndex int, toIndex int) []bool {
 
 // SubStringSlice returns a subslice with bound safety.
 func SubStringSlice(s []string, fromIndex int, toIndex int) []string {
-	goaround.RequireNonNull(s)
+	goaround.NotNil(s)
 	var length int = len(s)
 	if length == 0 {
 		return []string{}
@@ -126,7 +125,7 @@ func SubStringSlice(s []string, fromIndex int, toIndex int) []string {
 
 // SubIntSlice returns a subslice with bound safety.
 func SubIntSlice(s []int, fromIndex int, toIndex int) []int {
-	goaround.RequireNonNull(s)
+	goaround.NotNil(s)
 	var length int = len(s)
 	if length == 0 {
 		return []int{}
