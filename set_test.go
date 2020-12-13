@@ -34,7 +34,7 @@ func TestStringSet_AddAll(t *testing.T) {
 	set := NewStringSet()
 
 	if !set.AddAll([]string{"go", "around"}) {
-		t.Errorf("An empty set adding two strings should return ture, not false!")
+		t.Errorf("An empty set adding two strings should return true, not false!")
 	}
 
 	if !set.Contains("go") {
@@ -67,7 +67,7 @@ func TestStringSet_Clear(t *testing.T) {
 func TestStringSet_Contains(t *testing.T) {
 	set := NewStringSet()
 	set.Add("goaround")
-	if set["goaronud"] != Unit {
+	if set["goaround"] != Unit {
 		t.Errorf("%v should contain 'goaround', but it does not!", set)
 	}
 }
