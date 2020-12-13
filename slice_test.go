@@ -11,18 +11,22 @@ func ExampleGetByte() {
 	fmt.Println(GetByte("goaround", 2))
 	// Output: 97
 }
-func ExampleGetByteExceeding() {
+
+func ExampleGetByte_exceeding() {
 	fmt.Println(GetByte("goaround", 100))
 	// Output: 100
 }
-func ExampleGetByteNegative() {
-	fmt.Println(GetByte("goaround", -1))
+
+func ExampleGetByte_negative() {
+fmt.Println(GetByte("goaround", -1))
 	// Output: 100
 }
-func ExampleGetByteLeftExceeding() {
+
+func ExampleGetByte_leftExceeding() {
 	fmt.Println(GetByte("goaround", -100))
 	// Output: 103
 }
+
 func TestGetByteFromEmptyStringShouldPanic(t *testing.T) {
 	defer func() {
 		if r := recover(); r == nil {
@@ -37,16 +41,16 @@ func ExampleGetBool() {
 	fmt.Println(GetBool([]bool{true, false}, 0))
 	// Output: true
 }
-func ExampleGetBoolExceeding() {
+func ExampleGetBool_exceeding() {
 	fmt.Println(GetBool([]bool{true, false}, 100))
 	// Output: false
 }
-func ExampleGetBoolNegative() {
+func ExampleGetBool_negative() {
 	fmt.Println(GetBool([]bool{true, false}, -1))
 	// Output: false
 }
-func ExampleGetBoolLeftExceeding() {
-	fmt.Println(GetBool([]bool{true, false}, -100))
+func ExampleGetBool_left_exceeding() {
+	fmt.Println(GetBool([]bool{true, false}, -100)) // left exceeding
 	// Output: true
 }
 
@@ -54,53 +58,56 @@ func ExampleGetInt() {
 	fmt.Println(GetInt([]int{1, 2, 3}, 0))
 	// Output: 1
 }
-func ExampleGetIntExceeding() {
+func ExampleGetInt_exceeding() {
 	fmt.Println(GetInt([]int{1, 2, 3}, 100))
 	// Output: 3
 }
-func ExampleGetIntNegative() {
+func ExampleGetInt_negative() {
 	fmt.Println(GetInt([]int{1, 2, 3}, -1))
 	// Output: 3
 }
-func ExampleGetIntLeftExceeding() {
+func ExampleGetInt_leftExceeding() {
 	fmt.Println(GetInt([]int{1, 2, 3}, -100))
 	// Output: 1
 }
 
 func ExampleGetString() {
 	fmt.Println(GetString([]string{"go", "around"}, 0))
-	// Output: go
 }
-func ExampleGetStringExceeding() {
-	fmt.Println(GetString([]string{"go", "around"}, 100))
-	// Output: around
+func ExampleGetString_exceeding() {
+	fmt.Println(GetString([]string{"go", "exceeded"}, 100))
+	// Output: exceeded
 }
-func ExampleGetStringNegative() {
-	fmt.Println(GetString([]string{"go", "around"}, -1))
-	// Output: around
+func ExampleGetString_negative() {
+	fmt.Println(GetString([]string{"go", "negative"}, -1))
+	// Output: negative
 }
-func ExampleGetStringLeftExceeding() {
-	fmt.Println(GetString([]string{"go", "around"}, -100))
+func ExampleGetString_leftExceeding() {
+	fmt.Println(GetString([]string{"go", "left exceeding"}, -100))
 	// Output: go
 }
 
 func ExampleSubString() {
 	fmt.Println(SubString("goaround", 0, 2))
 	// Output: go
-}
-func ExampleSubStringNegative() {
-	fmt.Println(SubString("goaround", 2, -1))
-	// Output: aroun
-}
-func ExampleSubStringExceeding() {
-	fmt.Println(SubString("goaround", 2, 100))
-	// Output: around
-}
-func ExampleSubStringEqualIndices() {
-	fmt.Println(SubString("goaround", 2, 2))
-	// Output:
-}
-func ExampleSubEmptyString() {
+	}
+
+	func ExampleSubString_negative() {
+		fmt.Println(SubString("negative", 2, -1))
+		// Output: gativ
+	}
+
+	func ExampleSubString_exceeding() {
+		fmt.Println(SubString("exceeding", 2, 100))
+		// Output: ceeding
+	}
+
+	func ExampleSubString_equalIndices() {
+		fmt.Println(SubString("equal indices", 2, 2))
+		// Output:
+	}
+
+	func ExampleSubString_empty() {
 	fmt.Println(SubString("", 0, 0))
 	// Output:
 }
@@ -118,8 +125,9 @@ func ExampleSubBoolSlice() {
 	fmt.Println(SubBoolSlice([]bool{true, false}, 0, 1))
 	// Output: [true]
 }
-func ExampleSubEmptyBoolSlice() {
-	fmt.Println(SubBoolSlice([]bool{}, 0, 0))
+
+func ExampleSubBoolSlice_empty() {
+fmt.Println(SubBoolSlice([]bool{}, 0, 0))
 	// Output: []
 }
 
