@@ -48,3 +48,11 @@ func TestSkipDirOrFile(t *testing.T) {
 		t.Errorf("Given a regular file, SkipDirOrFile should return nil.")
 	}
 }
+
+func ExampleQuit() {
+	Quit(0, "Usage: foo [bar]\n")
+}
+
+func ExampleQuitf() {
+	Quitf(64, "Invalid argument: %v", nil)
+}
