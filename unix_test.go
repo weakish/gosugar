@@ -1,6 +1,9 @@
 package gosugar
 
-import "testing"
+import (
+	"os"
+	"testing"
+)
 
 func TestIsUnixHiddenFile(t *testing.T) {
 	tests := []struct {
@@ -36,5 +39,12 @@ func TestIsUnixHiddenFile(t *testing.T) {
 				t.Errorf("Test %v, expect %v, got %v.", test.name, test.output, result)
 			}
 		})
+	}
+}
+
+func TestSkipDirOrFile(t *testing.T) {
+	f, _ := os.Stat("unix.go")
+	if SkipDirOrFile(f) != nil {
+		t.Errorf("Given a regular file, SkipDirOrFile should return nil.")
 	}
 }
